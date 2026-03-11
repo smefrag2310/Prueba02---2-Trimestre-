@@ -24,7 +24,7 @@ public class GestorEmpleados {
 
 		do {
 			consola.mostrarMenu();
-			opcion = consola.leerEntero("Introduce la opción");
+			opcion = consola.leerEntero("Introduce la opción: ");
 
 			if (opcion == 1) {
 				contratarEmpleado();
@@ -53,13 +53,12 @@ public class GestorEmpleados {
 				1 - Técnico
 				2 - Comercial
 				""");
-		}while(opcion != 1 || opcion != 2);
+		}while(opcion != 1 && opcion != 2);
 
-		consola.imprimirLinea("Introduce los datos del empleado");
 		nombre = consola.leerTexto("Nombre: ");
 		apellidos = consola.leerTexto("Apellidos: ");
 		dni = consola.leerTexto("DNI: ");
-		sueldoBase = consola.leerImporte("Sueldo base");
+		sueldoBase = consola.leerImporte("Sueldo base: ");
 
 		if (opcion == 1) {
 			categoria = consola.leerEntero("Categoría: ");
@@ -70,21 +69,36 @@ public class GestorEmpleados {
 			((Comercial) nuevoEmpleado).setVentas(ventas);
 		}
 		plantilla.agregarEmpleado(nuevoEmpleado);
+		System.out.println("Se ha añadido al nuevo empleado");
 	}
 
 	public void listarTodos() {
+		List<Empleado> todos;
 		
+		todos= plantilla.getEmpleados();
+		
+		listarEmpleados(todos);
 	}
 
 	public void listarPorFiltro() {
 		List<Empleado> coincidencias;
 		coincidencias=plantilla.getEmpleadoPorNombre(consola.leerTexto("Introduce al empleado que quieres buscar: "));
-		
-		listarEmpleados(coincidencias);
-	}
+		if(coincidencias.isEmpty()) {
+			System.out.println("No se encontraron empleados con ese nombre o apellido");
+		}else {
+				listarEmpleados(coincidencias);
+			}
+		}
 
 	public void listarEmpleados(List<Empleado> empleados) {
 		
+		for(int i=0; i<empleados.size();i++) {
+			System.out.printf("%d - %s %s: %d €",
+					i+1,
+					empleados.get(i).getNombre(),
+					empleados.get(i).getApellidos(),
+					empleados.get(i).getSueldoBase());
+		}
 	}
 
 	public void ordenarPorNombre(List<Empleado> empleados) {

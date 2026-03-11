@@ -22,7 +22,7 @@ public class Consola implements EntradaSalida{
 	public String leerTexto(String mensaje) {
 		String texto;
 		
-		imprimirLinea(mensaje);
+		imprimir(mensaje);
 		texto= sc.nextLine();
 		
 		return texto.trim();
@@ -37,8 +37,10 @@ public class Consola implements EntradaSalida{
 			valido=true;
 			try {
 			entero=sc.nextInt();
+			sc.nextLine();
 			}catch(InputMismatchException e) {
 				System.out.println("Introduce un entero por favor");
+				sc.nextLine();
 				valido=false;
 			}
 		}while(!valido);
@@ -55,8 +57,10 @@ public class Consola implements EntradaSalida{
 			valido=true;
 			try {
 			importe=sc.nextDouble();
+			sc.nextLine();
 			}catch(InputMismatchException e) {
-				System.out.println("Introduce un numero decimal por favor");
+				System.out.println("Introduce un número decimal por favor");
+				sc.nextLine();
 				valido=false;
 			}
 		}while(!valido);
@@ -74,13 +78,13 @@ public class Consola implements EntradaSalida{
 	}
 	
 	public void limpiarPantalla() {
-		for(int i=0; i<10; i++) {
+		for(int i=0; i<15; i++) {
 			System.out.println();
 		}
 	}
 	
 	public void pausa() {
-		imprimirLinea("Pulse una tecla para continuar...");
-		
+		imprimirLinea("Pulse enter para continuar...");
+		sc.nextLine();
 	}
 }

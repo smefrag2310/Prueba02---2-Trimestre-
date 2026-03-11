@@ -11,6 +11,10 @@ public class Plantilla {
 		empleados= new ArrayList<>();
 	}
 	
+	public List<Empleado> getEmpleados(){
+		return empleados;
+	}
+	
 	public void agregarEmpleado(Empleado empleado) {
 		empleados.add(empleado);
 	}
